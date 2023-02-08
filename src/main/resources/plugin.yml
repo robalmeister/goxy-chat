@@ -1,0 +1,8 @@
+name: Goxy-Chat
+main: pl.robalmeister.goxy.chat.GoxyChatPlugin
+version: 0.0.1
+depend:
+  - "LuckPerms"
+softdepend:
+  - "goxy-pubsub"
+  - "goxy"

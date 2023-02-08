@@ -1,0 +1,10 @@
+chat:
+  #aby dzialały kolory trzeba dać permisje: chat.colors
+  #PlaceHoldery:
+  #[PLAYER] - nick gracza
+  #[PREFIX] - prefix z LuckPerms (albo nazwa roli)
+  #[MESSAGE] - wiadomość
+  message: "[PREFIX] &7[PLAYER]: &f[MESSAGE]"
+  #true - oznacza że bedzie pobierac prefix z tego serwera co gracz napisał
+  #false - oznacza żę bedzie pobierac prefix z każdego serwera gdzie wysłano wiadomość
+  prefix: true
