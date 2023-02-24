@@ -1,10 +1,10 @@
 package pl.robalmeister.goxy.chat.listener;
 
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.goxy.minecraft.api.GoxyApi;
 import pl.robalmeister.goxy.chat.GoxyChatPlugin;
 import pl.robalmeister.goxy.chat.chat.ChatData;
 import pl.robalmeister.goxy.chat.helper.LuckPermsHelper;
@@ -19,11 +19,13 @@ public class ChatListener implements Listener {
         this.pubSub = pubSub;
     }
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent e) {
+        if (e.isCancelled()) return;
+
         String server;
         try {
-            server = Objects.requireNonNull(GoxyApi.getNetworkManager().getServer()).getName();
+            server = Objects.requireNonNull(pl.goxy.minecraft.api.GoxyApi.getNetworkManager().getServer()).getName();
         } catch (Exception ignored) {
             server = "";
         }

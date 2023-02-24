@@ -2,9 +2,9 @@ package pl.robalmeister.goxy.chat;
 
 import net.kyori.adventure.platform.bukkit.BukkitAudiences;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.goxy.minecraft.pubsub.PubSubService;
 import pl.robalmeister.goxy.chat.chat.ChatData;
 import pl.robalmeister.goxy.chat.config.Configuration;
+import pl.robalmeister.goxy.chat.listener.ChatListener;
 import pl.robalmeister.goxy.chat.pubsub.PubSub;
 import pl.robalmeister.goxy.chat.pubsub.redis.RedisPubsub;
 
@@ -20,11 +20,12 @@ public class GoxyChatPlugin extends JavaPlugin {
         Configuration configuration = new Configuration(getConfig(), new File(getDataFolder(), "config.yml"));
         PubSub pubSub = new PubSub(BukkitAudiences.create(this), configuration);
         if (getServer().getPluginManager().isPluginEnabled("goxy-pubsub")) {
-            PubSubService pubSubService = (PubSubService) Objects.requireNonNull(
+            pl.goxy.minecraft.pubsub.PubSubService pubSubService = (pl.goxy.minecraft.pubsub.PubSubService) Objects.requireNonNull(
                     getServer().getPluginManager().getPlugin("goxy-pubsub"));
             goxyPubSub = pubSubService.getPubSub(this);
             ((pl.goxy.minecraft.pubsub.PubSub) goxyPubSub).registerHandler("chat", ChatData.class, new RedisPubsub(pubSub));
         }
+        getServer().getPluginManager().registerEvents(new ChatListener(pubSub), this);
     }
 
     public void send(ChatData chatData) {

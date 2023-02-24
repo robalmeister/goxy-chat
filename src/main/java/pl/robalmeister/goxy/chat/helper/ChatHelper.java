@@ -4,6 +4,7 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ChatHelper {
 
@@ -26,7 +27,7 @@ public class ChatHelper {
     }
 
     public static List<Component> parse(List<String> text) {
-        return text.stream().map(ChatHelper::parse).toList();
+        return text.stream().map(ChatHelper::parse).collect(Collectors.toList());
     }
 
     public static String serialize(Component text) {
@@ -34,7 +35,7 @@ public class ChatHelper {
     }
 
     public static List<String> serialize(List<Component> text) {
-        return text.stream().map(ChatHelper::serialize).toList();
+        return text.stream().map(ChatHelper::serialize).collect(Collectors.toList());
     }
 }
 

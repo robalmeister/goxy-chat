@@ -21,7 +21,7 @@ public class LuckPermsHelper {
 
     @NotNull
     public static String getPrefix(String group) {
-        return getPrefix(Optional.ofNullable(LuckPermsProvider.get().getGroupManager().getGroup(group)).orElseThrow());
+        return getPrefix(Optional.ofNullable(LuckPermsProvider.get().getGroupManager().getGroup(group)).orElseThrow(NullPointerException::new));
     }
 
 
@@ -32,6 +32,6 @@ public class LuckPermsHelper {
 
     @NotNull
     public static String getPrefix(Player player) {
-        return getPrefix(Optional.ofNullable(LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId())).orElseThrow());
+        return getPrefix(Optional.ofNullable(LuckPermsProvider.get().getUserManager().getUser(player.getUniqueId())).orElseThrow(NullPointerException::new));
     }
 }

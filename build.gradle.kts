@@ -1,5 +1,5 @@
 plugins {
-    java
+    `java-library`
     id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
@@ -11,10 +11,13 @@ repositories {
     maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
     maven { url = uri("https://repo.goxy.pl") }
 }
-tasks {
-    compileJava {
-        options.encoding = "UTF-8"
-    }
+tasks.withType<JavaCompile> {
+    options.encoding = "UTF-8"
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
+}
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(8))
 }
 dependencies {
     compileOnly("org.github.paperspigot:paperspigot-api:1.8.8-R0.1-SNAPSHOT")
